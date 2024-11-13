@@ -13,7 +13,7 @@ export default async function Page() {
       <HeroSection />
       <MarketingTracker />
       <SignUpDialog />
-      <WaitingListDialog open={!isLeadTracked?.value} />
+      <WaitingListDialog open={!!isLeadTracked?.value} />
     </>
   );
 }
