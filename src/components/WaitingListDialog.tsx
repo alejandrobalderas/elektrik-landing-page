@@ -13,9 +13,6 @@ import {
 const WaitingListDialog = ({ open }: { open: boolean }) => {
   return (
     <Dialog open={open}>
-      <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
-      </DialogTrigger>
       <DialogContent
         className="sm:max-w-[525px]"
         onInteractOutside={(e) => {

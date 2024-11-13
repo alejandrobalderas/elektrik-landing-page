@@ -63,7 +63,7 @@ export default function SignUpDialog() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="w-11/12 sm:max-w-md">
+      <DialogContent className="w-11/12 sm:max-w-md overflow-y-scroll max-h-screen">
         <DialogHeader>
           <DialogTitle>Sign Up to Elektrik</DialogTitle>
           <DialogDescription>
