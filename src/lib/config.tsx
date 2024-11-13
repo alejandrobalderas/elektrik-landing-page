@@ -8,10 +8,11 @@ export const siteConfig = {
   },
   copyWrite: {
     hero: {
-      mainText: "Main Text",
-      subText: "Sub Text",
+      mainText: "Get Your Electric Motorcycle Today!",
+      subText: "Just 3999 RM Upfront + 99 RM/month*",
+      disclaimer: "*subject to mariicas approval",
     },
-    cta: "CTA",
+    cta: "Start Riding Elektrik",
   },
 };
 

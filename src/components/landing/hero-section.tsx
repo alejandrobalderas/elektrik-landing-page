@@ -11,6 +11,8 @@ import { useRef } from "react";
 import Particles from "../magicui/particles";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import Logo from "../logo";
+import { useSignUpDialog } from "../SignUpProvider";
 
 export default function HeroSection() {
   const { mainText, subText } = siteConfig.copyWrite.hero;
@@ -19,14 +21,16 @@ export default function HeroSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const isMobile = useIsMobile();
+  const { setIsOpen } = useSignUpDialog();
+
   return (
     <section
       id="hero"
       className="flex items-center relative mx-auto mt-32 px-6 text-center md:px-8 h-[calc(100vh-12rem)]"
     >
-      <div className={cn("")}>
+      <div className={cn("h-full")}>
         <Image
-          src="/hc200.svg"
+          src="/hc200.png"
           alt="Hero background"
           fill
           className={cn(
@@ -55,13 +59,21 @@ export default function HeroSection() {
         <h1 className="py-6 text-5xl font-medium leading-none tracking-tighter text-balance sm:text-6xl md:text-7xl lg:text-8xl translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
           {mainText}
         </h1>
-        <p className="mb-12 text-lg tracking-tight text-gray-400 md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
+        <p className="mb-12 text-2xl font-semibold tracking-wide md:tracking-tight text-gray-200 md:text-3xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
           {subText}
         </p>
-        <Button className="translate-y-[-1rem] animate-fade-in gap-1 rounded-lg text-white dark:text-black opacity-0 ease-in-out [--animation-delay:600ms]">
+        <Button
+          onClick={() => {
+            setIsOpen(true);
+          }}
+          className="translate-y-[-1rem] animate-fade-in gap-1 rounded-lg text-white dark:text-black opacity-0 ease-in-out [--animation-delay:600ms]"
+        >
           <span>{cta}</span>
-          <ArrowRightIcon className="ml-1 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
+          <Logo width={20} height={20} />
         </Button>
+      </div>
+      <div className="absolute bottom-2 right-8 text-xs z-10 font-extralight">
+        {siteConfig.copyWrite.hero.disclaimer}
       </div>
     </section>
   );

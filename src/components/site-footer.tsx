@@ -79,7 +79,7 @@ export function SiteFooter() {
           </Link>
         </div>
         <div className="flex flex-col sm:flex-row sm:flex sm:items-center sm:justify-end rounded-md border-neutral-700/20 py-4 px-8 gap-2">
-          <span className="text-xs md:text-sm text-gray-500 sm:text-center dark:text-gray-400">
+          <span className=" text-right text-xs md:text-sm text-gray-500 sm:text-center dark:text-gray-400">
             Copyright © {new Date().getFullYear()}{" "}
             <Link href="/" className="cursor-pointer">
               Elektrik

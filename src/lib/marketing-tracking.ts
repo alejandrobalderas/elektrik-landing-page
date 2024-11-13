@@ -1,3 +1,4 @@
+"use server";
 import { cookies } from "next/headers";
 
 type TrackingParams = {
@@ -6,8 +7,8 @@ type TrackingParams = {
   medium?: string;
 };
 
-export const setTrackingCookies = (params: TrackingParams) => {
-  const cookieStore = cookies();
+export const setTrackingCookies = async (params: TrackingParams) => {
+  const cookieStore = await cookies();
   const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
 
   if (params.source) {

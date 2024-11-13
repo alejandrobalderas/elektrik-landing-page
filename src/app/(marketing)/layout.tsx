@@ -1,3 +1,4 @@
+import { SignUpProvider } from "@/components/SignUpProvider";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
@@ -10,10 +11,11 @@ export default async function MarketingLayout({
 }: MarketingLayoutProps) {
   return (
     <>
-      {/* <SiteBanner /> */}
-      <SiteHeader />
-      <main className="mx-auto flex-1 overflow-hidden">{children}</main>
-      <SiteFooter />
+      <SignUpProvider>
+        <SiteHeader />
+        <main className="mx-auto flex-1 overflow-hidden">{children}</main>
+        <SiteFooter />
+      </SignUpProvider>
     </>
   );
 }
