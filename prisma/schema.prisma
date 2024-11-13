@@ -14,7 +14,7 @@ datasource db {
 model PageView {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-  userId    String?
+  uuid      String?
   source    String?
   campaign  String?
   medium    String?

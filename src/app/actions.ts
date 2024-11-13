@@ -38,3 +38,28 @@ export async function trackLead({
     console.error("Failed to track lead:", error);
   }
 }
+
+export async function trackPageView({
+  uuid,
+  source,
+  campaign,
+  medium,
+}: {
+  uuid?: string;
+  source?: string;
+  campaign?: string;
+  medium?: string;
+}) {
+  try {
+    await db.pageView.create({
+      data: {
+        uuid,
+        source,
+        campaign,
+        medium,
+      },
+    });
+  } catch (error) {
+    console.error("Failed to track page view:", error);
+  }
+}

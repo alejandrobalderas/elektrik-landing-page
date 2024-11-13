@@ -1,5 +1,6 @@
 "use client";
 
+import { trackPageView } from "@/app/actions";
 import { useSignUpDialog } from "@/components/SignUpProvider";
 import { setTrackingCookies } from "@/lib/marketing-tracking";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -18,21 +19,26 @@ const MarketingTracker = () => {
   const { setIsOpen } = useSignUpDialog();
 
   useEffect(() => {
-    if (
+    const trackVisit =
       searchParams.has("utm_source") ||
       searchParams.has("utm_campaign") ||
-      searchParams.has("utm_medium")
-    ) {
-      const trackingParams = {
-        source: searchParams.get("utm_source") || undefined,
-        campaign: searchParams.get("utm_campaign") || undefined,
-        medium: searchParams.get("utm_medium") || undefined,
-      };
-      // Clean URL by pushing new route without params
-      setTrackingCookies(trackingParams);
-      setIsOpen(true);
-      router.replace("/", { scroll: false });
-    }
+      searchParams.has("utm_medium");
+
+    const trackMarketing = async () => {
+      if (trackVisit) {
+        const trackingParams = {
+          source: searchParams.get("utm_source") || undefined,
+          campaign: searchParams.get("utm_campaign") || undefined,
+          medium: searchParams.get("utm_medium") || undefined,
+        };
+
+        setIsOpen(true);
+        const uuid = await setTrackingCookies(trackingParams);
+        await trackPageView({ uuid, ...trackingParams });
+        router.replace("/", { scroll: false });
+      }
+    };
+    trackMarketing();
   }, [setTrackingCookies, setIsOpen, router, searchParams]);
 
   return null;

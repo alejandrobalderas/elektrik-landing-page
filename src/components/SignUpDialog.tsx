@@ -23,6 +23,7 @@ import * as z from "zod";
 import { useSignUpDialog } from "./SignUpProvider";
 import { useMutation } from "@tanstack/react-query";
 import { trackLead } from "@/app/actions";
+import Spinner from "./Spinner";
 
 const formSchema = z.object({
   firstName: z.string().min(2, {
@@ -52,7 +53,7 @@ export default function SignUpDialog() {
     },
   });
 
-  const { mutate: onSubmit } = useMutation({
+  const { mutate: onSubmit, isPending } = useMutation({
     mutationFn: async (data: z.infer<typeof formSchema>) => {
       await trackLead({ ...data });
     },
@@ -132,8 +133,8 @@ export default function SignUpDialog() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
-              Submit
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending ? <Spinner /> : "Submit"}
             </Button>
           </form>
         </Form>

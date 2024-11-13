@@ -1,5 +1,6 @@
 "use server";
 import { cookies } from "next/headers";
+import { v4 as uuidv4 } from "uuid";
 
 type TrackingParams = {
   source?: string;
@@ -7,7 +8,9 @@ type TrackingParams = {
   medium?: string;
 };
 
-export const setTrackingCookies = async (params: TrackingParams) => {
+export const setTrackingCookies = async (
+  params: TrackingParams
+): Promise<string> => {
   const cookieStore = await cookies();
   const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
 
@@ -20,4 +23,8 @@ export const setTrackingCookies = async (params: TrackingParams) => {
   if (params.medium) {
     cookieStore.set("utm_medium", params.medium, { expires });
   }
+  const uuid = cookieStore.get("uuid")?.value || uuidv4();
+  cookieStore.set("uuid", uuidv4(), { expires });
+
+  return uuid;
 };
