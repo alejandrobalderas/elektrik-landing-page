@@ -35,8 +35,11 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  telephone: z.string().regex(/^\d{8}$/, {
-    message: "Please enter a valid 8-digit telephone number.",
+  // telephone: z.string().regex(/^\d{8}$/, {
+  //   message: "Please enter a valid 8-digit telephone number.",
+  // }),
+  telephone: z.string().min(4, {
+    message: "Please enter a valid telephone number with at least 4 digits.",
   }),
 });
 
